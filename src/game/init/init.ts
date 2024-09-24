@@ -3,7 +3,7 @@ import { Mountain } from '../models/mountain';
 import { Treasure } from '../models/treasure';
 import { TreasuresMap } from '../models/treasuresMap'
 import { Actions } from '../actions/actions';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
 
 export class Init {
@@ -12,13 +12,10 @@ export class Init {
     initGame() {
         // Replacing CRLF end of file with LF end of file to make sure every file works
         const fileLines = readFileSync('./data/inputFile.txt', 'utf-8').replace(/\r\n/g, '\n').split('\n')
-        console.log(fileLines)
         this.initMap(fileLines)
-        console.log(this.map)
-
+        this.executeGame()
+        this.writeOutput()
     }
-
-    
 
     private initMap(fileLines: string[]) {
         for (const line of fileLines) {
@@ -30,18 +27,15 @@ export class Init {
                         this.map.width = parseInt(lineAsArray[1])
                         break
                     }
-                    case 'T': {
+                    case 'T': 
                         this.map.treasures.push(this.createTreasure(lineAsArray))
                         break
-                    }
-                    case 'M': {
+                    case 'M':
                         this.map.mountains.push(this.createMountain(lineAsArray))
                         break
-                    }
-                    case 'A': {
+                    case 'A':
                         this.map.adventurers.push(this.createAdventurer(lineAsArray))
                         break
-                    }
                 }
             }
         }
@@ -75,6 +69,29 @@ export class Init {
 
     private executeGame() {
         const actions = new Actions
-        actions.executeAdventurerActions(this.map.adventurers)
+        actions.executeActions(this.map)
+    }
+
+    private writeOutput() {
+        let finalResult = ""
+
+        finalResult += `C - ${this.map.width} - ${this.map.height}\n`
+
+        for (const mountain of this.map.mountains) {
+            finalResult += `M - ${mountain.widthIndex} - ${mountain.heightIndex}\n`
+        }
+
+        for (const treasure of this.map.treasures) {
+            if (treasure.numberRemaining > 0)
+                finalResult += `T - ${treasure.widthIndex} - ${treasure.heightIndex} - ${treasure.numberRemaining}\n`
+        }
+
+        for (const adventurer of this.map.adventurers) {
+            finalResult += `A - ${adventurer.name} - ${adventurer.widthIndex} - ${adventurer.heightIndex} - ${adventurer.direction} - ${adventurer.treasuresNumber}\n`
+        }
+
+        console.log(finalResult)
+
+        writeFileSync('./data/outputFile.txt', finalResult)
     }
 }
