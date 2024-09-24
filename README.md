@@ -1,2 +1,2 @@
 # treasure-map
-Petit jeu de carte au trésor
+Petit jeu de carte aux trésors
