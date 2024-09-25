@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="5.47">
+  <testsuite name="testing action file" errors="0" failures="0" skipped="0" timestamp="2024-09-25T12:38:37" time="4.687" tests="6">
+    <testcase classname="testing action file execute Action to go throw all actions" name="testing action file execute Action to go throw all actions" time="0.036">
+    </testcase>
+    <testcase classname="testing action file get max actions" name="testing action file get max actions" time="0.003">
+    </testcase>
+    <testcase classname="testing action file move forward with directions" name="testing action file move forward with directions" time="0.003">
+    </testcase>
+    <testcase classname="testing action file should collect treasure and update number" name="testing action file should collect treasure and update number" time="0.001">
+    </testcase>
+    <testcase classname="testing action file checking new directions while turning left" name="testing action file checking new directions while turning left" time="0.002">
+    </testcase>
+    <testcase classname="testing action file checking new directions while turning right" name="testing action file checking new directions while turning right" time="0.002">
+    </testcase>
+  </testsuite>
+</testsuites>
