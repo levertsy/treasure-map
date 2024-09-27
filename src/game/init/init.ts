@@ -90,8 +90,6 @@ export class Init {
             finalResult += `A - ${adventurer.name} - ${adventurer.widthIndex} - ${adventurer.heightIndex} - ${adventurer.direction} - ${adventurer.treasuresNumber}\n`
         }
 
-        console.log(finalResult)
-
         writeFileSync('./data/outputFile.txt', finalResult)
     }
 }
